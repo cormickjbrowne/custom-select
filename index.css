@@ -1,0 +1,54 @@
+.custom-select {
+  cursor: pointer;
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover {
+  background-color: lightgrey;
+}
+
+.selected {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+  font-family: Roboto;
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.option {
+  font-family: Roboto;
+  font-size: 8pt;
+  padding: 3px;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-width: 300px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.option:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.option:first-child {
+  border-top: 1px solid #ccc;
+}
+
+.chevron {
+  width: 10px;
+  height: 10px;
+}
+
+.selected:hover {
+  cursor: pointer;
+}
