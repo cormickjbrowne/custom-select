@@ -36,12 +36,8 @@
 }
 
 .option:hover {
-  background-color: lightblue;
+  background-color: #EBEBEC;
   cursor: pointer;
-}
-
-.option:first-child {
-  border-top: 1px solid #ccc;
 }
 
 .chevron {

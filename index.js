@@ -23,8 +23,9 @@
   const buildSelected = (updateState, container) => {
     const selected = document.createElement("div");
     selected.setAttribute("class", SELECTED_CLASS);
-    selected.addEventListener("click", () => {
+    selected.addEventListener("click", e => {
       updateState(select => Object.assign({}, select, { open: !select.open }));
+      e.stopPropagation();
     });
     container.appendChild(selected);
   };
@@ -97,6 +98,12 @@
 
       buildSelected(makeStateUpdater(i), container);
       buildOptionsContainer(container);
+    });
+
+    document.addEventListener("click", () => {
+      selectContainers
+        .map((_, i) => makeStateUpdater(i))
+        .forEach(updateState => updateState(select => Object.assign({}, select, { open: false })));
     });
 
     render();
