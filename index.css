@@ -11,24 +11,26 @@
 }
 
 .selected {
-  border: 1px solid #ccc;
+  color: #5d5d5d;
+  border: 1px solid #ebebeb;
   display: flex;
   align-items: center;
-  padding: 3px;
+  padding: 6px;
   justify-content: space-between;
   width: 100%;
   max-width: 300px;
   font-family: Roboto;
-  font-size: 8pt;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
 }
 
 .option {
+  color: #5d5d5d;
   font-family: Roboto;
-  font-size: 8pt;
-  padding: 3px;
-  border: 1px solid #ccc;
+  font-size: 12px;
+  padding: 6px;
+  border: 1px solid #ebebeb;
   border-top: none;
   max-width: 300px;
   text-transform: uppercase;
@@ -36,7 +38,7 @@
 }
 
 .option:hover {
-  background-color: #EBEBEC;
+  background-color: #ebebeb;
   cursor: pointer;
 }
 
