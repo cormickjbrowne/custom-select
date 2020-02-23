@@ -1,0 +1,1 @@
+It seems like the point of this exercise was to create an HTML select element to replace the native one since often it's difficult to style.
