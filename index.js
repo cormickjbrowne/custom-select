@@ -1,4 +1,4 @@
-(function() {
+function createCustomSelectors() {
   const state = {
     selects: []
   };
@@ -20,17 +20,23 @@
     return el;
   };
 
-  const buildSelected = (updateState, container) => {
+  const buildSelected = (updateState, container, numOptions) => {
     const selected = document.createElement("div");
     selected.setAttribute("class", SELECTED_CLASS);
-    selected.addEventListener("click", e => {
-      updateState(select => Object.assign({}, select, { open: !select.open }));
-      e.stopPropagation();
-    });
+
+    if (numOptions > 1) {
+      selected.addEventListener("click", e => {
+        updateState(select => Object.assign({}, select, { open: !select.open }));
+        e.stopPropagation();
+      });
+    } else {
+      selected.setAttribute("disabled", true);
+    }
+
     container.appendChild(selected);
   };
 
-  const makeSelectedContent = (open, label) => {
+  const makeSelectedContent = (open, label, numOptions) => {
     const labelEl = [setInnerHTML(label), addClass("label")].reduce(
       compose,
       document.createElement("div")
@@ -42,7 +48,7 @@
       document.createElement("img")
     );
 
-    return [labelEl, chevron];
+    return numOptions > 1 ? [labelEl, chevron] : [labelEl];
   };
 
   const buildOptionsContainer = container => {
@@ -88,7 +94,10 @@
   function construct() {
     selectContainers.forEach((container, i) => {
       const selectEl = container.getElementsByTagName("select")[0];
+      selectEl.className += " select-hide";
       const { value, options } = selectEl;
+      const numOptions = [...options].length;
+
       state.selects.push({
         selectEl,
         value,
@@ -96,7 +105,7 @@
         options: [...options].map(option => pick(option, ["label", "value"]))
       });
 
-      buildSelected(makeStateUpdater(i), container);
+      buildSelected(makeStateUpdater(i), container, numOptions);
       buildOptionsContainer(container);
     });
 
@@ -113,12 +122,16 @@
     selectContainers.forEach((container, i) => {
       const { selectEl, value, open, options } = state.selects[i];
       const { label } = options.find(option => option.value === value);
+      const numOptions = options.length;
 
       // Update real select's value
       selectEl.value = value;
 
       // Update fake select's displayed value
-      [getSelected, replaceChildren(makeSelectedContent(open, label))].reduce(compose, container);
+      [getSelected, replaceChildren(makeSelectedContent(open, label, numOptions))].reduce(
+        compose,
+        container
+      );
 
       // Update fake select's options
       const updateState = makeStateUpdater(i);
@@ -128,4 +141,6 @@
   }
 
   construct();
-})();
+}
+
+createCustomSelectors();

@@ -50,3 +50,7 @@
 .selected:hover {
   cursor: pointer;
 }
+
+.selected[disabled]:hover {
+  cursor: default;
+}
